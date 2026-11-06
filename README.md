@@ -26,7 +26,7 @@ Mikus is a local-first Android assistant. Chat inference runs on the phone throu
 2. **Wake phrase monitoring is best-effort, not a system hotword provider.** It uses Android's on-device speech-recognition service in short recognition sessions, not a dedicated always-on DSP keyword detector. It can miss phrases, restart between utterances, consume battery, and be stopped by Android/Samsung. It does not start after reboot. Start it while Mikus is visible and keep its ongoing notification. Screen-locked operation is possible only while Android permits the already-started microphone foreground service to continue.
 3. **Offline voice depends on the phone's installed speech services and language packs.** Mikus requests on-device recognition and refuses cloud fallback. If no on-device recognizer or offline English (India) pack is installed, voice input is unavailable. TTS is silent unless an offline voice is installed.
 4. **The app is not a privileged Android assistant.** It does not replace Google Assistant/Bixby, obtain privileged hotword access, bypass microphone privacy indicators, or silently send SMS/calls.
-5. **No Galaxy S25 Ultra test was possible here.** The APK must complete the GitHub Actions build and be installed/tested on the actual device before treating this as a production release.
+5. **Device validation is still required.** The GitHub build must pass, then install and test the APK on a Galaxy S25 Ultra. Verify model loading, long chat sessions, microphone permission, offline recognition, TTS, notifications, reminders, backup/restore and battery behavior before relying on it.
 6. **Semantic memory is not an embedding/vector database.** This delivery implements local BM25 retrieval and feeds relevant passages to the local LLM. It does not claim human-like recall or vector-semantic search.
 
 ## Build and upload to GitHub
@@ -36,7 +36,7 @@ Mikus is a local-first Android assistant. Chat inference runs on the phone throu
 1. Create a GitHub repository, e.g. `mikus-personal-assistant`.
 2. Extract this ZIP and upload the **contents** of `Mikus-GitHub-Ready` to the repository root. Include `.github` and `scripts`.
 3. Push to `main` or open **Actions → Build Mikus Android APK → Run workflow**.
-4. The workflow downloads the upstream llama.cpp source, installs Android SDK/NDK/CMake, builds the native binding and app, runs JVM tests, and uploads `mikus-debug-apk`.
+4. The workflow downloads the upstream llama.cpp source, installs Android SDK/NDK/CMake, builds the native binding and app, runs JVM tests, and uploads `mikus-debug-apk`. The native preparation script is `prepare-native.sh` in the repository root.
 5. Download the artifact from the successful workflow run and install the APK.
 
 The first native build can take a while. The repository itself stays compact because the native llama.cpp source is fetched during the build and `native/` is ignored by Git.
