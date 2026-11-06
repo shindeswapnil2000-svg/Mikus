@@ -20,6 +20,7 @@ plugins {
     id("com.android.library")
     id("org.jetbrains.kotlin.android")
 }
+import org.jetbrains.kotlin.gradle.dsl.JvmTarget
 android {
     namespace = "com.arm.aichat"
     compileSdk = 36
@@ -33,9 +34,8 @@ android {
     }
     externalNativeBuild { cmake { path = file("src/main/cpp/CMakeLists.txt"); version = "3.31.6" } }
     compileOptions { sourceCompatibility = JavaVersion.VERSION_17; targetCompatibility = JavaVersion.VERSION_17 }
-    kotlinOptions { jvmTarget = "17" }
-    packaging { jniLibs { useLegacyPackaging = false }; resources { excludes += "/META-INF/{AL2.0,LGPL2.1}" } }
 }
+kotlin { compilerOptions { jvmTarget.set(JvmTarget.JVM_17) } }
 dependencies {
     implementation("androidx.core:core-ktx:1.17.0")
     implementation("androidx.datastore:datastore-preferences:1.2.0")
