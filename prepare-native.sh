@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 set -euo pipefail
-ROOT="$(cd "$(dirname "$0")/.." && pwd)"
+ROOT="$(cd "$(dirname "$0")" && pwd)"
 DEST="$ROOT/native/llama.cpp"
 mkdir -p "$ROOT/native"
 if [ ! -d "$DEST/.git" ]; then
@@ -20,7 +20,6 @@ plugins {
     id("com.android.library")
     id("org.jetbrains.kotlin.android")
 }
-
 android {
     namespace = "com.arm.aichat"
     compileSdk = 36
@@ -29,19 +28,7 @@ android {
         minSdk = 33
         ndk { abiFilters += listOf("arm64-v8a", "x86_64") }
         externalNativeBuild {
-            cmake {
-                arguments += listOf(
-                    "-DCMAKE_BUILD_TYPE=Release",
-                    "-DBUILD_SHARED_LIBS=ON",
-                    "-DLLAMA_BUILD_APP=OFF",
-                    "-DLLAMA_BUILD_COMMON=ON",
-                    "-DLLAMA_OPENSSL=OFF",
-                    "-DGGML_NATIVE=OFF",
-                    "-DGGML_BACKEND_DL=ON",
-                    "-DGGML_CPU_ALL_VARIANTS=ON",
-                    "-DGGML_LLAMAFILE=OFF"
-                )
-            }
+            cmake { arguments += listOf("-DCMAKE_BUILD_TYPE=Release","-DBUILD_SHARED_LIBS=ON","-DLLAMA_BUILD_APP=OFF","-DLLAMA_BUILD_COMMON=ON","-DLLAMA_OPENSSL=OFF","-DGGML_NATIVE=OFF","-DGGML_BACKEND_DL=ON","-DGGML_CPU_ALL_VARIANTS=ON","-DGGML_LLAMAFILE=OFF") }
         }
     }
     externalNativeBuild { cmake { path = file("src/main/cpp/CMakeLists.txt"); version = "3.31.6" } }
@@ -49,7 +36,6 @@ android {
     kotlinOptions { jvmTarget = "17" }
     packaging { jniLibs { useLegacyPackaging = false }; resources { excludes += "/META-INF/{AL2.0,LGPL2.1}" } }
 }
-
 dependencies {
     implementation("androidx.core:core-ktx:1.17.0")
     implementation("androidx.datastore:datastore-preferences:1.2.0")
