@@ -16,11 +16,11 @@ if [ ! -f "$LIB/src/main/cpp/CMakeLists.txt" ]; then
   exit 2
 fi
 cat > "$LIB/build.gradle.kts" <<'GRADLE'
+import org.jetbrains.kotlin.gradle.dsl.JvmTarget
 plugins {
     id("com.android.library")
     id("org.jetbrains.kotlin.android")
 }
-import org.jetbrains.kotlin.gradle.dsl.JvmTarget
 android {
     namespace = "com.arm.aichat"
     compileSdk = 36
