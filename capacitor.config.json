@@ -1,0 +1,9 @@
+{
+  "appId": "app.taskmaster.personal",
+  "appName": "Taskmaster",
+  "webDir": "www",
+  "backgroundColor": "#0B0B0F",
+  "plugins": {
+    "SystemBars": { "style": "DARK" }
+  }
+}

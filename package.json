@@ -1,0 +1,11 @@
+{
+  "name": "taskmaster",
+  "version": "3.1.0",
+  "private": true,
+  "description": "Taskmaster, a blunt accountability assistant (Android build) with SOS, research feed and PhD pathway",
+  "dependencies": {
+    "@capacitor/android": "8.6.0",
+    "@capacitor/core": "8.6.0"
+  },
+  "devDependencies": { "@capacitor/cli": "8.6.0" }
+}
